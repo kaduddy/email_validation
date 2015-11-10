@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Emails Entered</title>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css')}}">
+</head>
+<body>
+	<h1>Email Addresses Entered:</h1>
+	<h2>Would you like to delete an email?</h2>
+	<form action='/delete' method = 'post'>
+		<input type='text' name='delete'>
+		<input type='submit' value='delete'>
+	</form>
+	{% with messages = get_flashed_messages() %}
+		{% if messages %}
+			{% for message in messages %}
+				<p id='flash_message'>{{message}}</p>
+			{% endfor %}
+		{% endif %}
+	{% endwith %}
+	{% for email in emails %}
+		<p> {{email['email']}} {{email['created_at']}}</p>
+	{% endfor %}
+</body>
+</html>
